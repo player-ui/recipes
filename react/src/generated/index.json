@@ -1,0 +1,219 @@
+{
+  "id": "Flow",
+  "views": [
+    {
+      "id": "View_1",
+      "type": "stacked-view",
+      "header": {
+        "asset": {
+          "id": "View_1-header",
+          "type": "text",
+          "as": "h1",
+          "size": "xl",
+          "fontWeight": "bold",
+          "value": "View 1"
+        }
+      },
+      "main": {
+        "asset": {
+          "id": "View_1-main",
+          "type": "collection",
+          "values": [
+            {
+              "asset": {
+                "id": "View_1-main-values-0",
+                "type": "input",
+                "binding": "userData.name",
+                "label": {
+                  "asset": {
+                    "id": "View_1-main-values-0-label",
+                    "type": "text",
+                    "value": "Name"
+                  }
+                }
+              }
+            },
+            {
+              "asset": {
+                "id": "View_1-main-values-1",
+                "type": "input",
+                "binding": "userData.age",
+                "label": {
+                  "asset": {
+                    "id": "View_1-main-values-1-label",
+                    "type": "text",
+                    "value": "Age"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "footer": {
+        "asset": {
+          "id": "View_1-footer",
+          "type": "action",
+          "value": "View_2",
+          "label": {
+            "asset": {
+              "id": "View_1-footer-label",
+              "type": "text",
+              "as": "b",
+              "value": "Next"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "View_2",
+      "type": "stacked-view",
+      "header": {
+        "asset": {
+          "id": "View_2-header",
+          "type": "text",
+          "as": "h1",
+          "size": "xl",
+          "fontWeight": "bold",
+          "value": "View 2"
+        }
+      },
+      "main": {
+        "asset": {
+          "id": "View_2-main",
+          "type": "collection",
+          "values": [
+            {
+              "asset": {
+                "id": "View_2-main-values-0",
+                "type": "input",
+                "binding": "userData.phone",
+                "label": {
+                  "asset": {
+                    "id": "View_2-main-values-0-label",
+                    "type": "text",
+                    "value": "Phone"
+                  }
+                }
+              }
+            },
+            {
+              "asset": {
+                "id": "View_2-main-values-1",
+                "type": "input",
+                "binding": "userData.city",
+                "label": {
+                  "asset": {
+                    "id": "View_2-main-values-1-label",
+                    "type": "text",
+                    "value": "City"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "footer": {
+        "asset": {
+          "id": "View_2-footer",
+          "type": "action",
+          "value": "View_1",
+          "label": {
+            "asset": {
+              "id": "View_2-footer-label",
+              "type": "text",
+              "as": "b",
+              "value": "Previous"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "navigation": {
+    "BEGIN": "Plugin",
+    "Plugin": {
+      "startState": "VIEW_1",
+      "VIEW_1": {
+        "state_type": "VIEW",
+        "ref": "View_1",
+        "transitions": {
+          "View_1": "VIEW_1",
+          "View_2": "VIEW_2"
+        }
+      },
+      "VIEW_2": {
+        "state_type": "VIEW",
+        "ref": "View_2",
+        "transitions": {
+          "View_1": "VIEW_1",
+          "View_2": "VIEW_2"
+        }
+      }
+    }
+  },
+  "schema": {
+    "userData": {
+      "name": {
+        "type": "StringType",
+        "default": "",
+        "validation": [
+          {
+            "type": "string"
+          }
+        ],
+        "format": {
+          "type": "string"
+        }
+      },
+      "age": {
+        "type": "IntegerNNType",
+        "validation": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "min",
+            "value": 0
+          }
+        ],
+        "format": {
+          "type": "integer"
+        }
+      },
+      "phone": {
+        "type": "PhoneType",
+        "validation": [
+          {
+            "type": "phone"
+          }
+        ],
+        "format": {
+          "type": "phone"
+        }
+      },
+      "city": {
+        "type": "StringType",
+        "default": "",
+        "validation": [
+          {
+            "type": "string"
+          }
+        ],
+        "format": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "data": {
+    "userData": {
+      "name": "",
+      "age": 0,
+      "phone": "",
+      "city": ""
+    }
+  }
+}
