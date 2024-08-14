@@ -13,16 +13,16 @@ Actions can advance Player's state machine using the `value` prop, and/or evalua
 
 ## DSL Properties
 
-| Property                  | Type                      | Required  | Description                                                       |
-| ------------------------- | ------------------------- | --------- | ----------------------------------------------------------------- | ------------------ | ----- | -------------- |
-| `value`                   | `string`                  | false     | The value to transition to when the action is clicked             |
-| `icon`                    | `AssetWrapper`            | false     | The icon to display on the action                                 |
-| `label`                   | `AssetWrapper<TextAsset>` | false     | A text asset for the action's label                               |
-| `exp`                     | `string`                  | false     | The expression to evaluate when the action is clicked             |
-| `metadata.skipValidation` | `boolean`                 | false     | Force transition to the next view without checking for validation |
-| `metadata.variant`        | `"solid"                  | "outline" | "ghost"                                                           | "link"`            | false | Button variant |
-| `metadata.isLoading`      | `boolean`                 | false     | Indicate a spinner for loading                                    |
-| `metadata.iconPosition`   | `"left"                   | "right"`  | false                                                             | Disable the action |
+ Property | Type | Required | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | false | The value to transition to when the action is clicked |
+| `icon` | `AssetWrapper` | false | The icon to display on the action |
+| `label` | `AssetWrapper<TextAsset>` | false | A text asset for the action's label |
+| `exp` | `string` | false | The expression to evaluate when the action is clicked |
+| `metadata.skipValidation` | `boolean` | false | Force transition to the next view without checking for validation |
+| `metadata.variant` | `"solid" | "outline" | "ghost" | "link"` | false | Button variant |
+| `metadata.isLoading` | `boolean` | false | Indicate a spinner for loading |
+| `metadata.iconPosition` | `"left" | "right"` | false | Disable the action |
 
 ## Basic Use Case
 

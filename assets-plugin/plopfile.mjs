@@ -34,11 +34,16 @@ export default function (plop) {
 
   plop.setActionType("renameFiles", function (answers) {
     const { assetName } = answers;
-    fs.renameSync(join(basePath, "BUILD.hbs"), join(basePath, "BUILD"));
-    return `${assetName}/README and ${assetName}/BUILD have been renamed`;
+    const kebabCaseName = assetName.toLowerCase().replace(/\s/g, "-");
+
+    fs.renameSync(
+      join(basePath, `react/assets/${kebabCaseName}/BUILD.hbs`),
+      join(basePath, `react/assets/${kebabCaseName}/BUILD`)
+    );
+    return `BUILD have been renamed`;
   });
 
-  plop.setActionType("renameStorybookaFiles", function (answers) {
+  plop.setActionType("renameStorybookFiles", function (answers) {
     const { assetName } = answers;
 
     const pascalCaseName = assetName.replace(/(^\w|-\w|\s+\w)/g, (text) => {
@@ -51,13 +56,13 @@ export default function (plop) {
     );
 
     fs.renameSync(
-      path.join(sbTemplatesBasePath, "template.mdx"),
-      path.join(sbTemplatesBasePath, `${pascalCaseName}.mdx`)
+      join(sbTemplatesBasePath, "template.mdx"),
+      join(sbTemplatesBasePath, `${pascalCaseName}.mdx`)
     );
 
     fs.renameSync(
-      path.join(sbTemplatesBasePath, "template.stories.tsx"),
-      path.join(sbTemplatesBasePath, `${pascalCaseName}.stories.tsx`)
+      join(sbTemplatesBasePath, "template.stories.tsx"),
+      join(sbTemplatesBasePath, `${pascalCaseName}.stories.tsx`)
     );
 
     return `${sbTemplatesBasePath}/template.stories.tsx.hbs and ${sbTemplatesBasePath}/template.stories.tsx.hbs have been renamed`;
@@ -85,6 +90,59 @@ export default function (plop) {
         type: "renameFiles",
       },
       ...Object.values(extendedActions),
+    ],
+  });
+
+  plop.setGenerator("remove-examples", {
+    description: "Remove example assets",
+    actions: [
+      {
+        type: "emptyExampleFiles",
+        path: "./docs/storybook/src/assets",
+      },
+      {
+        type: "emptyExampleFiles",
+        path: "./docs/storybook/src/flows",
+      },
+      {
+        type: "emptyExampleFiles",
+        path: "./react/assets",
+      },
+      {
+        type: "modify",
+        path: "./react/plugin/src/plugins/AssetsRegistryPlugin.tsx",
+        pattern:
+          /(import { InputAsset, InputComponent } from "@assets-plugin\/input";\nimport {\n  StackedViewAsset,\n  StackedViewComponent,\n} from "@assets-plugin\/stacked-view";\nimport { ActionAsset, ActionComponent } from "@assets-plugin\/action";\nimport {\n  CollectionAsset,\n  CollectionComponent,\n} from "@assets-plugin\/collection";\nimport { TextAsset, TextComponent } from "@assets-plugin\/text";\n\nand delete the following lines:\n\n        \["input", InputComponent\],\n        \["stacked-view", StackedViewComponent\],\n        \["action", ActionComponent\],\n        \["text", TextComponent\],\n        \["collection", CollectionComponent\],)/g,
+        template: "",
+      },
+      {
+        type: "modify",
+        path: "./react/plugin/src/plugins/TransformsPlugin.ts",
+        pattern:
+          /(import { actionTransform } from "@assets-plugin\/action";\nimport { inputTransform } from "@assets-plugin\/input";\n\nand remove the following lines:\n\n        \[{ type: "action" }, actionTransform\],\n        \[{ type: "input" }, inputTransform\],)/g,
+        template: "",
+      },
+      {
+        type: "modify",
+        path: "./react/plugin/BUILD",
+        pattern:
+          /(:node_modules\/@assets-plugin\/action",\n        ":node_modules\/@assets-plugin\/collection",\n        ":node_modules\/@assets-plugin\/stacked-view",\n        ":node_modules\/@assets-plugin\/input",\n        ":node_modules\/@assets-plugin\/text",)/g,
+        template: "",
+      },
+      {
+        type: "modify",
+        path: "./react/plugin/package.json",
+        pattern:
+          /("@assets-plugin\/action": "workspace:\*",\n    "@assets-plugin\/collection": "workspace:\*",\n    "@assets-plugin\/input": "workspace:\*",\n    "@assets-plugin\/text": "workspace:\*",\n    "@assets-plugin\/stacked-view": "workspace:\*",)/g,
+        template: "",
+      },
+      {
+        type: "modify",
+        path: "./pnpm-workspace.yaml",
+        pattern:
+          /(  - "react\/assets\/collection"\n  - "react\/assets\/text"\n  - "react\/assets\/action"\n  - "react\/assets\/input"\n  - "react\/assets\/stacked-view")/g,
+        template: "",
+      },
     ],
   });
 }
@@ -201,56 +259,3 @@ const extendedActions = {
       '\n        [{ type: "{{kebabCase assetName}}" }, {{camelCase assetName}}Transform],',
   },
 };
-
-plop.setGenerator("remove-examples", {
-  description: "Remove example assets",
-  actions: [
-    {
-      type: "emptyExampleFiles",
-      path: "./docs/storybook/src/assets",
-    },
-    {
-      type: "emptyExampleFiles",
-      path: "./docs/storybook/src/flows",
-    },
-    {
-      type: "emptyExampleFiles",
-      path: "./react/assets",
-    },
-    {
-      type: "modify",
-      path: "./react/plugin/src/plugins/AssetsRegistryPlugin.tsx",
-      pattern:
-        /(import { InputAsset, InputComponent } from "@assets-plugin\/input";\nimport {\n  StackedViewAsset,\n  StackedViewComponent,\n} from "@assets-plugin\/stacked-view";\nimport { ActionAsset, ActionComponent } from "@assets-plugin\/action";\nimport {\n  CollectionAsset,\n  CollectionComponent,\n} from "@assets-plugin\/collection";\nimport { TextAsset, TextComponent } from "@assets-plugin\/text";\n\nand delete the following lines:\n\n        \["input", InputComponent\],\n        \["stacked-view", StackedViewComponent\],\n        \["action", ActionComponent\],\n        \["text", TextComponent\],\n        \["collection", CollectionComponent\],)/g,
-      template: "",
-    },
-    {
-      type: "modify",
-      path: "./react/plugin/src/plugins/TransformsPlugin.ts",
-      pattern:
-        /(import { actionTransform } from "@assets-plugin\/action";\nimport { inputTransform } from "@assets-plugin\/input";\n\nand remove the following lines:\n\n        \[{ type: "action" }, actionTransform\],\n        \[{ type: "input" }, inputTransform\],)/g,
-      template: "",
-    },
-    {
-      type: "modify",
-      path: "./react/plugin/BUILD",
-      pattern:
-        /(:node_modules\/@assets-plugin\/action",\n        ":node_modules\/@assets-plugin\/collection",\n        ":node_modules\/@assets-plugin\/stacked-view",\n        ":node_modules\/@assets-plugin\/input",\n        ":node_modules\/@assets-plugin\/text",)/g,
-      template: "",
-    },
-    {
-      type: "modify",
-      path: "./react/plugin/package.json",
-      pattern:
-        /("@assets-plugin\/action": "workspace:\*",\n    "@assets-plugin\/collection": "workspace:\*",\n    "@assets-plugin\/input": "workspace:\*",\n    "@assets-plugin\/text": "workspace:\*",\n    "@assets-plugin\/stacked-view": "workspace:\*",)/g,
-      template: "",
-    },
-    {
-      type: "modify",
-      path: "./pnpm-workspace.yaml",
-      pattern:
-        /(  - "react\/assets\/collection"\n  - "react\/assets\/text"\n  - "react\/assets\/action"\n  - "react\/assets\/input"\n  - "react\/assets\/stacked-view")/g,
-      template: "",
-    },
-  ],
-});
