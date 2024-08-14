@@ -1,6 +1,6 @@
 import fs from "fs";
 import { fileURLToPath } from "url";
-import { dirname, resolve, join } from "path";
+import path, { dirname, resolve, join } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -224,18 +224,18 @@ const extendedActions = {
     pattern: /(export\stype\s{)+(.|\n)*(?=\n};\n\s)/,
     template: "  {{pascalCase assetName}}Asset,",
   },
-  pluginSrcAssetRegistryAssetImport: {
-    type: "append",
-    path: "./react/plugin/src/plugins/AssetsRegistryPlugin.tsx",
-    pattern: /(.|\n)+@dev.+/,
-    template:
-      'import { {{pascalCase assetName}}Asset, {{pascalCase assetName}}Component } from "@assets-plugin/{{kebabCase assetName}}";',
-  },
   pluginSrcAssetRegistryAssetInterfaceExport: {
     type: "modify",
     path: "./react/plugin/src/plugins/AssetsRegistryPlugin.tsx",
-    pattern: /(?=\s+])/,
-    template: ",\n        {{pascalCase assetName}}Asset",
+    pattern: /(?<=<\n\s*\[)(.|\n)+(?=\n\s*\]>)/,
+    template: "$&, {{pascalCase assetName}}Asset",
+  },
+  pluginSrcAssetRegistryAssetImport: {
+    type: "append",
+    path: "./react/plugin/src/plugins/AssetsRegistryPlugin.tsx",
+    pattern: /(?<=import { TransformsPlugin } from "\.\/TransformsPlugin";\n)/,
+    template:
+      'import { {{pascalCase assetName}}Asset, {{pascalCase assetName}}Component } from "@assets-plugin/{{kebabCase assetName}}";',
   },
   pluginSrcAssetRegistryAssetProvider: {
     type: "modify",
@@ -246,14 +246,14 @@ const extendedActions = {
   },
   pluginSrcTransformFunctionImport: {
     type: "append",
-    path: "./react/plugin/src/plugins/TransformPlugin.ts",
-    pattern: /(.|\n)+@dev.+/,
+    path: "./react/plugin/src/plugins/TransformsPlugin.ts",
+    pattern: /(?<=import { inputTransform } from "@assets-plugin\/input";\n)/,
     template:
       'import { {{camelCase assetName}}Transform } from "@assets-plugin/{{kebabCase assetName}}";',
   },
   pluginSrcTransformFunctionRegistry: {
     type: "modify",
-    path: "./react/plugin/src/plugins/TransformPlugin.ts",
+    path: "./react/plugin/src/plugins/TransformsPlugin.ts",
     pattern: /(?=\s+])/,
     template:
       '\n        [{ type: "{{kebabCase assetName}}" }, {{camelCase assetName}}Transform],',
