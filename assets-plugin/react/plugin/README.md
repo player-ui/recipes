@@ -4,7 +4,7 @@
 
 `@assets-plugin/plugin` is a [Player-UI](https://player-ui.github.io/next/plugins) assets plugin.
 
-It register the following assets to your React Player instance:
+It register the following assets into your React Player instance:
 
 - action
 - collection

@@ -15,13 +15,13 @@ profile
 # Node modules
 node_modules
 addon-storybook/node_modules
-action/node_modules
-collection/node_modules
-text/node_modules
-input/node_modules
-plugin/node_modules
 docs/storybook/node_modules
-stacked-view/node_modules
+react/assets/action/node_modules
+react/assets/collection/node_modules
+react/assets/text/node_modules
+react/assets/input/node_modules
+react/assets/stacked-view/node_modules
+react/plugin/node_modules
 
 # Backup files
 _backup

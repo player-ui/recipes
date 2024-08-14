@@ -2,7 +2,7 @@
   "name": "assets-plugin",
   "version": "0.0.0",
   "private": true,
-  "description": "Player UI Assets Plugin Recipe",
+  "description": "Player UI Assets Plugin",
   "scripts": {
     "setup": "node ./scripts/generate-pnpm-workspace.js",
     "link:local": "node ./scripts/pnpm-link-setup.js",
@@ -10,7 +10,8 @@
     "prepare": "is-ci || husky install",
     "test": "bazel test -- $(bazel query \"kind(nodejs_test, //...)\" --output label 2>/dev/null | tr '\\n' ' ')",
     "pub:local": "scripts/publish-to-verdaccio.sh",
-    "gen:asset": "plop asset"
+    "gen:react-asset": "plop react-asset",
+    "gen:remove-examples": "plop remove-examples"
   },
   "engines": {
     "node": "^18.18.0",

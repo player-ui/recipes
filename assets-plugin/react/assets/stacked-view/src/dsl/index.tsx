@@ -9,7 +9,7 @@ import type { StackedViewAsset } from "../types";
  * Defines the component DSL representation for the StackedView view.
  */
 export const StackedView = (
-  props: AssetPropsWithChildren<StackedViewAsset>,
+  props: AssetPropsWithChildren<StackedViewAsset>
 ) => {
   const { children, ...rest } = props;
 

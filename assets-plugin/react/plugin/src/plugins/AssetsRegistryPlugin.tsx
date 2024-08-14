@@ -1,26 +1,16 @@
-import React from "react";
-import type { Player, PlayerPlugin } from "@player-ui/player";
+import type { Player } from "@player-ui/player";
 import type {
   ExtendedPlayerPlugin,
   ReactPlayer,
   ReactPlayerPlugin,
 } from "@player-ui/react";
-import { AssetTransformPlugin } from "@player-ui/asset-transform-plugin";
 import { AssetProviderPlugin } from "@player-ui/asset-provider-plugin-react";
-import {
-  InputAsset,
-  InputComponent,
-  inputTransform,
-} from "@assets-plugin/input";
+import { InputAsset, InputComponent } from "@assets-plugin/input";
 import {
   StackedViewAsset,
   StackedViewComponent,
 } from "@assets-plugin/stacked-view";
-import {
-  ActionAsset,
-  ActionComponent,
-  actionTransform,
-} from "@assets-plugin/action";
+import { ActionAsset, ActionComponent } from "@assets-plugin/action";
 import {
   CollectionAsset,
   CollectionComponent,
@@ -45,7 +35,7 @@ export class AssetsRegistryPlugin
         ["action", ActionComponent],
         ["text", TextComponent],
         ["collection", CollectionComponent],
-      ]),
+      ])
     );
   }
 

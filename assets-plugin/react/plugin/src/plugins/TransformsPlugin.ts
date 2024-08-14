@@ -11,7 +11,7 @@ export class TransformsPlugin implements PlayerPlugin {
       new AssetTransformPlugin([
         [{ type: "action" }, actionTransform],
         [{ type: "input" }, inputTransform],
-      ]),
+      ])
     );
   }
 }

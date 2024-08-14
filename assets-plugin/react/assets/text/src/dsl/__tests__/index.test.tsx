@@ -1,7 +1,7 @@
 import React from "react";
 import { describe, expect, test } from "vitest";
 import { render } from "@player-tools/dsl";
-import { Text } from "../";
+import { Text } from "..";
 
 describe("DSL: Text", () => {
   test("Renders text - no optional props", async () => {
@@ -24,7 +24,7 @@ describe("DSL: Text", () => {
         fontWeight="bold"
       >
         Test
-      </Text>,
+      </Text>
     );
 
     expect(rendered.jsonValue).toStrictEqual({
