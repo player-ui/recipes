@@ -1,0 +1,67 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Welcome" />
+
+# Devtools-UI
+
+Welcome to Devtools-UI, a monorepo containing a collection of assets packages and an assets plugin designed to be leveraged by [Player-UI](https://player-ui.github.io/).
+
+## Packages
+
+The packages in this repository are designed to be used as assets in Player-UI. Each package is self-contained and can be used independently.
+
+## Assets Plugin
+
+The assets plugin is a convenient way to use the assets packages in Player-UI. It provides a unified interface for managing and using the assets.
+
+It register the following assets to your React Player instance:
+
+- action
+- collection
+- input
+- text
+
+## Getting Started
+
+The easiest way to get started is to use the `@assets-plugin/plugin` package.
+
+## Installation
+
+To install `@assets-plugin/plugin`, you can use pnpm or yarn:
+
+```sh
+pnpm i @assets-plugin/plugin
+```
+
+or
+
+```sh
+yarn add @assets-plugin/plugin
+```
+
+## Usage
+
+You can leverage this plugin through the `@assets-plugin/plugin`:
+
+```ts
+import { ReactPlayer } from "@player-ui/react";
+import DevtoolsUIPlugin from "@assets-plugin/plugin";
+
+const reactPlayer = new ReactPlayer({
+  plugins: [new DevtoolsUIPlugin()],
+});
+```
+
+And leverage the DSL components to author your content:
+
+```tsx
+import { Collection, Text } from "@assets-plugin/plugin";
+
+const content = (
+  <Collection>
+    <Collection.Values>
+        <Text>My Collection</Text>
+    </List>
+  </Collection>
+);
+```

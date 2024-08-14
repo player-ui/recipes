@@ -1,0 +1,13 @@
+{
+  "name": "@assets-plugin/plugin",
+  "version": "0.0.0-PLACEHOLDER",
+  "sideEffects": false,
+  "main": "src/index.ts",
+  "dependencies": {
+    "@assets-plugin/action": "workspace:*",
+    "@assets-plugin/collection": "workspace:*",
+    "@assets-plugin/input": "workspace:*",
+    "@assets-plugin/text": "workspace:*",
+    "@assets-plugin/stacked-view": "workspace:*"
+  }
+}
