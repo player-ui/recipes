@@ -1,0 +1,23 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import * as InputStories from "./Input.stories";
+
+<Meta of={InputStories} />
+
+# Input Asset
+
+> type: `input`
+
+It provides an `Input` component that can be used to acquire data from the user.
+
+## DSL Properties
+
+| Property      | Type                      | Required | Description                                      |
+| ------------- | ------------------------- | -------- | ------------------------------------------------ |
+| `binding`     | `string`                  | false    | The location in the data-model to store the data |
+| `label`       | `AssetWrapper<TextAsset>` | false    | A text asset for the action's label              |
+| `note`        | `AssetWrapper<TextAsset>` | false    | Asset container for a note                       |
+| `placeholder` | `string`                  | false    | A text asset for the input's placeholder         |
+
+## Basic Use Case
+
+<Canvas of={InputStories.Basic} />

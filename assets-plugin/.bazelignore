@@ -1,0 +1,49 @@
+# Cache files
+.cache
+bep.json
+xcui.json
+coverage
+CoverageData/
+DerivedData
+profile
+
+# Git and CI/CD related files
+.git
+.circleci
+.github
+
+# Node modules
+node_modules
+addon-storybook/node_modules
+docs/storybook/node_modules
+react/assets/action/node_modules
+react/assets/collection/node_modules
+react/assets/text/node_modules
+react/assets/input/node_modules
+react/assets/stacked-view/node_modules
+react/plugin/node_modules
+
+# Backup files
+_backup
+
+# Xcode related files
+xcode/Pods
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xccheckout
+*.hmap
+*.ipa
+xcode/Pods/
+
+# Other files and directories
+build/
+*.moved-aside
+ios/*/*/Resources/**/*.js
+.husky
