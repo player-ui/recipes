@@ -5,3 +5,4 @@ This repository contains examples (recipes) on how to use [Player-UI](https://pl
 ## Table of Contents
 
 - [React, writing your own Player-UI assets plugin](react/README.md)
+- [assets-plugin](assets-plugin/README.md)
