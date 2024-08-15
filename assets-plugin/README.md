@@ -10,11 +10,13 @@ The assets plugin is a convenient way to use the assets packages in Player-UI. I
 
 ## Getting Started
 
-To get started with Devtools-UI, you need to install the dependencies. We use `pnpm` as the package manager. If you haven't installed it, you can do so by running `npm install -g pnpm`. Then, you can install the dependencies by running `pnpm install`.
+To get started you need to install the dependencies. We use `pnpm` as the package manager. If you haven't installed it, you can do so by running `npm install -g pnpm`. Then, you can install the dependencies by running `pnpm install`.
 
 ## Development
 
 For development, we use Bazel. If you haven't installed it, you can do so by following the instructions on the [Bazel website](https://bazel.build/).
+
+Make sure to get [bazelisk](https://github.com/bazelbuild/bazelisk) to manage the version of Bazel.
 
 To build the project, you can run `bazel build //...`.
 
@@ -31,7 +33,3 @@ We provide a plop generator for creating new assets. You can run it by executing
 ## Contributing
 
 We welcome contributions! If you find something interesting you want to contribute to the repo, feel free to raise a PR, or open an issue for features you'd like to see added.
-
-## License
-
-Devtools-UI is [MIT licensed](./LICENSE).
